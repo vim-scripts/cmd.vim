@@ -1,0 +1,35 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=3040
+
+
+Cmd.vim is a vim plugin to provide vim the ability to execute shell command
+directly in vim and echo the result in vim. For example, you could use ":!ls"
+to list all the files of current directory, Now cmd.vim provide a new command
+":Ls" to implement the same function, but the result is in vim insteading of in
+the shell. The mainpage in Chinese is avaiable at:
+
+http://code.google.com/p/cmd-dot-vim/
+
+There are many well known shell command to implement powerful functions, now I
+port them to vim version, In the current release, there are four command
+available now, More are to be added. For those not listed below, you could use
+":Shell your_command" to execute your_command like "! your_command", with the
+result in Vim insteading of Shell.
+
+	":Date" - print or set the system date and time
+	":Gcc" - gcc - GNU project C and C++ compiler
+	":Ls" - list directory contents
+	":Sdcv Words" - call sdcv to lookup Words in vim
+
+[Note]: Please note that since Vim claim user defined commands must start with an
+uppercase letter, so every shell command start with an uppercase letter.
+
+[Note]: Please note that cmd.vim is an adapter, So please make sure the original
+command is available. it is expected that cmd.vim works where the original
+command works, whatever it's Linux, Cygwin, Windows, or Mac. 
+
+[Note]: In most circumstances, it will be better if you map them to your
+favorite map, For example, To look up the a word under the cursor, or to lookup
+the words selected:
+
+	nmap <script> <silent> <unique> <Leader>l <ESC>:Sdcv '<cword>' <CR>
+	vmap <script> <silent> <unique> <Leader>l y<ESC>:Sdcv <c-r>" <CR>
