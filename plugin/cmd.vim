@@ -3,33 +3,22 @@
 "Date: 2010.4.2
 "Base version: 1.0
 
-"date - print or set the system date and time
-com! -nargs=0 Date call Cmd_Date()
-fun! Cmd_Date ()
-	let Cmd_Cmd = 'date'
+"Build-in functions
+com! -nargs=0 Date call Cmd_Shell("date", <q-args>)
+com! -nargs=0 Ls call Cmd_Shell("ls", <q-args>)
+com! -nargs=* Gcc call Cmd_Shell("gcc", expand("%"), <q-args>)
+
+"Need install by yourself
+com! -nargs=* -range=0 -complete=file Sdcv call Cmd_Shell("sdcv", <q-args>)
+
+function Cmd_Shell(...)
+	let Cmd_Cmd = ''
+	for s in a:000
+		let Cmd_Cmd .= s . ' '
+	endfor
+	echo Cmd_Cmd
 	let Cmd_Output = system(Cmd_Cmd)
+	"let Cmd_Output = iconv(Cmd_Output, "utf8", "cp936")
 	echo Cmd_Output
-endfun
-
-"ls - list directory contents
-com! -nargs=0 Ls call Cmd_Ls()
-fun! Cmd_Ls ()
-	let Cmd_Cmd = 'ls'
-	let ls_output = system(Cmd_Cmd)
-	echo ls_output
-endfun
-
-" sdcv: http://sdcv.sourceforge.net/
-com! -nargs=* -range=0 -complete=file Sdcv call s:Cmd_Sdcv(<q-args>)
-function! s:Cmd_Sdcv (word)
-	"let Cmd_Output = 'sdcv --data-dir=/cygdrive/c/Program\ Files/StarDict/dic '
-	let Cmd_Output = 'sdcv '
-	if a:word == ""
-		let Cmd_Output .= expand('<cword>')
-	endif
-	let Cmd_Output .= a:word
-	let sdcv_output = system(Cmd_Output)
-
-	echohl Statement | echo sdcv_output | echohl Normal
 endfunction
 
