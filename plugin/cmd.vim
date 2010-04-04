@@ -3,6 +3,9 @@
 "Date: 2010.4.2
 "Base version: 1.0
 
+com! -nargs=* -range=0 -complete=file Shell call Cmd_Shell(<q-args>)
+com! -nargs=* -range=0 -complete=file Cmd call Cmd_Shell(<q-args>)
+
 "Build-in functions
 com! -nargs=0 Date call Cmd_Shell("date", <q-args>)
 com! -nargs=0 Ls call Cmd_Shell("ls", <q-args>)
