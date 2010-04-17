@@ -7,7 +7,11 @@ com! -nargs=* -range=0 -complete=file Shell call Cmd_Shell(<q-args>)
 com! -nargs=* -range=0 -complete=file Cmd call Cmd_Shell(<q-args>)
 
 "Build-in functions
-com! -nargs=0 Date call Cmd_Shell("date", <q-args>)
+if (has("win32"))
+	com! -nargs=0 Date call Cmd_Shell("date /t", <q-args>)
+else
+	com! -nargs=0 Date call Cmd_Shell("date", <q-args>)
+endif
 com! -nargs=0 Ls call Cmd_Shell("ls", <q-args>)
 com! -nargs=* Gcc call Cmd_Shell("gcc", expand("%"), <q-args>)
 
